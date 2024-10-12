@@ -1,9 +1,12 @@
 package TestesExceptions.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Reservation {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private Integer numberRoom;
 
@@ -38,10 +41,20 @@ public class Reservation {
     }
 
     public long duration () {
-        long result = checkIn.getTime() + checkOut.getTime();
-        return TimeUnit.DAYS.convert(result, TimeUnit.MICROSECONDS);
+        long result = checkOut.getTime() - checkIn.getTime();
+        return TimeUnit.DAYS.convert(result, TimeUnit.MILLISECONDS);
     }
 
+    public void updateDate (Date checkIn, Date checkOut) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Reservation: Room: " + numberRoom
+                + ", ChekIn: " + sdf.format(checkIn)
+                + ", Chekout: " + sdf.format(checkOut)
+                + ", Duration: " + duration() + " nights";
+    }
 }
