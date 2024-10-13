@@ -22,7 +22,7 @@ public class Reservation {
 
     public Reservation(Integer numberRoom, Date checkIn, Date checkOut) {
         if (!checkOut.after(checkIn)) {
-            throw new DomainException("Check-Out date after Check-In date.");
+            throw new DomainException("Check-Out date after Check-In date");
         }
         this.numberRoom = numberRoom;
         this.checkIn = checkIn;
